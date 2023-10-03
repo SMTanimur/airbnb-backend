@@ -41,7 +41,7 @@ export class ListsService {
     const options = {
       limit,
       page,
-      populate: 'host',
+      populate: ['host'],
     };
     const query: any = {};
 
@@ -106,9 +106,6 @@ export class ListsService {
 
     const responses = await this.listModel.paginate(query, options);
     return PaginationResponse(responses);
-  }
-  async findAll() {
-    return await this.listModel.find();
   }
   async findOne(id: string) {
     return (await this.listModel.findById(id)).populate([

@@ -6,6 +6,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   Req,
@@ -40,8 +41,15 @@ export class ListsController {
   @ApiOperation({ summary: 'Get all Listing' })
   @ApiOkResponse({ description: 'success' })
   @Get()
-  async getShops(@Query() query: GetListsDto) {
+  async getLists(@Query() query: GetListsDto) {
     console.log(query);
     return this.listsService.getLists(query);
+  }
+
+  @ApiOperation({ summary: 'Get all Listing' })
+  @ApiOkResponse({ description: 'success' })
+  @Get(':id')
+  async getList(@Param('id') id: string) {
+    return this.listsService.findOne(id);
   }
 }

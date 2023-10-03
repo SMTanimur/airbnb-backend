@@ -1,11 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsDate,
-  IsEnum,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { SortOrder } from 'src/common/dto/generic-conditions.dto';
 import { PaginationArgs } from 'src/common/dto/pagination-args.dto';
 
@@ -57,14 +51,14 @@ export class GetListsDto extends PaginationArgs {
   bathroomCount: number;
 
   @ApiPropertyOptional()
-  @IsDate()
+  @IsString()
   @IsOptional()
-  startDate: Date;
+  startDate: string;
 
   @ApiPropertyOptional()
-  @IsDate()
+  @IsString()
   @IsOptional()
-  endDate: Date;
+  endDate: string;
 }
 export class GetMyListsDto extends PaginationArgs {
   @IsString()

@@ -52,10 +52,15 @@ export class List {
   @ApiProperty({ required: true })
   @Prop({ required: true })
   @IsString()
+  imageSrc: string;
+
+  @ApiProperty({ required: true })
+  @Prop({ required: true })
+  @IsString()
   locationValue: string;
 
   @ApiProperty({ required: true })
-  @Prop({ type: mongoose.Types.ObjectId, required: true })
+  @Prop({ type: mongoose.Types.ObjectId, ref: 'User' })
   host: User;
 
   @ApiProperty()
