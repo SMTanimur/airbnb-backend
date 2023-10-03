@@ -19,7 +19,7 @@ async function bootstrap() {
     app.enableCors({
       credentials: true,
       origin: [
-        // configurationService.WEB_URL,
+        configurationService.WEB_URL,
         // configurationService.ADMIN_URL,
         'http://localhost:3000',
         'http://localhost:4000',

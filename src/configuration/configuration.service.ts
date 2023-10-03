@@ -18,6 +18,9 @@ export class ConfigurationService {
   get API_URL() {
     return this.configService.get<string>('API_URL');
   }
+  get WEB_URL() {
+    return this.configService.get<string>('WEB_URL');
+  }
   get PORT() {
     return this.configService.get<number>('PORT');
   }

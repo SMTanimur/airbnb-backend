@@ -14,6 +14,7 @@ import * as Joi from 'joi';
         JWT_SECRET_KEY: Joi.string().required(),
         PORT: Joi.number().required(),
         API_URL: Joi.string().required(),
+        WEB_URL: Joi.string().required(),
         CLOUDINARY_API_SECRET: Joi.string().required(),
         CLOUDINARY_API_KEY: Joi.string().required(),
         CLOUDINARY_CLOUD_NAME: Joi.string().required(),
