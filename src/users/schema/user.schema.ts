@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-// import { Address } from 'src/addresses/schemas/address.schema';
 import * as bcrypt from 'bcryptjs';
 import {
   IsEmail,

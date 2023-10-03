@@ -21,7 +21,7 @@ async function bootstrap() {
       origin: [
         // configurationService.WEB_URL,
         // configurationService.ADMIN_URL,
-        'http://localhost:4200',
+        'http://localhost:3000',
         'http://localhost:4000',
         'https://accounts.google.com',
       ],

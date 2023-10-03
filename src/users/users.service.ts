@@ -25,11 +25,9 @@ export class UsersService {
   ) {}
 
   async me(user: any): Promise<User> {
-    return this.userModel
-      .findOne({
-        _id: user._id,
-      })
-      .populate(['addresses']);
+    return this.userModel.findOne({
+      _id: user._id,
+    });
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -57,10 +55,10 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    return await this.userModel.findOne({ _id: id }).populate(['addresses']);
+    return await this.userModel.findOne({ _id: id });
   }
   async findUser(id: string) {
-    return await this.userModel.findOne({ _id: id }).populate(['addresses']);
+    return await this.userModel.findOne({ _id: id });
   }
 
   async findUserOne(query: object): Promise<UserDocument> {
@@ -71,7 +69,7 @@ export class UsersService {
     return user;
   }
   async findOneByEmail(email: string) {
-    return await this.userModel.findOne({ email }).populate(['addresses']);
+    return await this.userModel.findOne({ email });
   }
 
   async validateUser(loginDto: LoginDto) {

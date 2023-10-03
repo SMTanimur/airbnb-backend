@@ -1,18 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  BadRequestException,
   Body,
   Controller,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Post,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
-  ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -22,14 +18,12 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 // import { AccountActivateDto } from './dto/account-activate.dto';
 import { LoginDto } from './dto/login.dto';
 import { UsersService } from '../users/users.service';
-import { AccountActivateDto } from './dto/account-activate.dto';
 import { JwtService } from '@nestjs/jwt';
 import { pick } from 'lodash';
 
 import { ConfigurationService } from 'src/configuration/configuration.service';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTService } from './jwt.service';
-import { ChangePasswordDto } from './dto/change-password.dto';
 
 @ApiTags('Auth')
 @Controller({ path: 'auth', version: '1' })
@@ -47,7 +41,18 @@ export class AuthController {
   @ApiOkResponse({ description: 'Register user' })
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
-    await this.usersService.create(createUserDto);
+    const data = await this.usersService.create(createUserDto);
+    const user = pick(data, ['_id', 'email', 'name', 'role']);
+    const { access_token, expires_in } = await this.jwt.createToken(
+      user.email,
+      user.role,
+    );
+    return {
+      message: `Welcome to Airbnb! 🎉`,
+      user: user,
+      token: access_token,
+      expires_in,
+    };
   }
 
   @ApiOperation({ summary: 'Logs user into the system' })
