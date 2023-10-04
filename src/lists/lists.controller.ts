@@ -25,13 +25,13 @@ import { ListsService } from './lists.service';
 import { CreateListDto } from './dto/create.list-dto';
 import { GetListsDto } from './dto/get-lists.dto';
 @ApiBearerAuth()
-@UseGuards(JwtGuard)
 @ApiTags(List.name)
 @Controller({ path: 'lists', version: '1' })
 export class ListsController {
   constructor(private readonly listsService: ListsService) {}
   @ApiOperation({ summary: 'create a New List' })
   @ApiCreatedResponse({ description: 'Create a List' })
+  @UseGuards(JwtGuard)
   @Post()
   createList(@Body() createListDto: CreateListDto, @Req() req) {
     createListDto.host = req.user._id;
@@ -42,7 +42,7 @@ export class ListsController {
   @ApiOkResponse({ description: 'success' })
   @Get()
   async getLists(@Query() query: GetListsDto) {
-    console.log(query);
+    console.log(query, 'djfdk');
     return this.listsService.getLists(query);
   }
 

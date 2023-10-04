@@ -78,11 +78,11 @@ export class ListsService {
     }
 
     if (bathroomCount) {
-      query['bathroomCount'] = Number(+bathroomCount);
+      query['bathroomCount'] = Number(bathroomCount);
     }
 
     if (category) {
-      query['category'] = category;
+      query['category'] = category.trim();
     }
 
     if (endDate) {
@@ -90,15 +90,15 @@ export class ListsService {
     }
 
     if (guestCount) {
-      query['guestCount'] = Number(+guestCount);
+      query['guestCount'] = Number(guestCount);
     }
 
     if (locationValue) {
-      query['locationValue'] = locationValue;
+      query['locationValue'] = locationValue.trim();
     }
 
     if (roomCount) {
-      query['roomCount'] = Number(+roomCount);
+      query['roomCount'] = Number(roomCount);
     }
 
     if (orderBy && sortedBy) {
@@ -108,6 +108,7 @@ export class ListsService {
     }
 
     const responses = await this.listModel.paginate(query, options);
+    console.log(responses);
     return PaginationResponse(responses);
   }
   async findOne(id: string) {
