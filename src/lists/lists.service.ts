@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { List, ListSchema } from './schema/list.schema';
 import mongoose, { PaginateModel } from 'mongoose';
-import { Reservation, ReservationSchema } from './schema/reservation.schema';
+import {
+  Reservation,
+  ReservationSchema,
+} from '../reservations/schema/reservation.schema';
 import { CreateListDto } from './dto/create.list-dto';
 import { GetListsDto } from './dto/get-lists.dto';
 import { PaginationResponse } from 'src/common/dto/response.middleware';
@@ -45,30 +48,30 @@ export class ListsService {
     };
     const query: any = {};
 
-    if (startDate && endDate) {
-      query['$expr'] = {
-        $not: {
-          $or: [
-            {
-              $and: [
-                {
-                  $gte: ['$reservations.startDate', startDate],
-                  $lte: ['$reservations.startDate', endDate],
-                },
-              ],
-            },
-            {
-              $and: [
-                {
-                  $lte: ['$reservations.startDate', endDate],
-                  $gte: ['$reservations.endDate', startDate],
-                },
-              ],
-            },
-          ],
-        },
-      };
-    }
+    // if (startDate && endDate) {
+    //   query['reservations.startDate'] = {
+    //     $not: {
+    //       $or: [
+    //         {
+    //           $and: [
+    //             {
+    //               $gte: ['$reservations.startDate', startDate],
+    //               $lte: ['$reservations.startDate', endDate],
+    //             },
+    //           ],
+    //         },
+    //         {
+    //           $and: [
+    //             {
+    //               $lte: ['$reservations.startDate', endDate],
+    //               $gte: ['$reservations.endDate', startDate],
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   };
+    // }
 
     if (host) {
       query['host'] = new mongoose.Types.ObjectId(host);

@@ -8,7 +8,6 @@ export class CreateListDto extends PickType(List, [
   'guestCount',
   'host',
   'locationValue',
-  'reservations',
   'imageSrc',
   'roomCount',
   'title',

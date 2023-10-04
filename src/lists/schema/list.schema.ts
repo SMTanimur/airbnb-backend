@@ -8,7 +8,7 @@ import {
   IsOptional,
 } from 'class-validator';
 import { User } from 'src/users/schema/user.schema';
-import { Reservation, ReservationSchema } from './reservation.schema';
+import { Reservation } from '../../reservations/schema/reservation.schema';
 
 export type ListSchema = List & Document;
 
@@ -66,7 +66,7 @@ export class List {
   @ApiProperty()
   @ValidateNested()
   @IsOptional()
-  @Prop({ type: [ReservationSchema] })
-  reservations?: Types.Array<Reservation>;
+  @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'Reservation' }] })
+  reservations: Reservation[];
 }
 export const ListSchema = SchemaFactory.createForClass(List);

@@ -7,9 +7,13 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from 'src/common/constants/roles.enum';
+import { List } from 'src/lists/schema/list.schema';
+import mongoose from 'mongoose';
+import { Reservation } from 'src/reservations/schema/reservation.schema';
 
 @Schema({ timestamps: true })
 export class User {
@@ -49,6 +53,16 @@ export class User {
     type: String,
   })
   role?: string;
+
+  @ValidateNested()
+  @IsOptional()
+  @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'List' }] })
+  listings?: List[];
+
+  @ValidateNested()
+  @IsOptional()
+  @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'Reservation' }] })
+  reservations?: Reservation[];
 }
 
 export interface UserDocument extends User {
