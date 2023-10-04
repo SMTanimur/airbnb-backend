@@ -42,7 +42,6 @@ export class ListsController {
   @ApiOkResponse({ description: 'success' })
   @Get()
   async getLists(@Query() query: GetListsDto) {
-    console.log(query, 'djfdk');
     return this.listsService.getLists(query);
   }
 

@@ -108,7 +108,6 @@ export class ListsService {
     }
 
     const responses = await this.listModel.paginate(query, options);
-    console.log(responses);
     return PaginationResponse(responses);
   }
   async findOne(id: string) {
