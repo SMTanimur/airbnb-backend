@@ -38,6 +38,8 @@ export class ListsService {
     locationValue,
     roomCount,
     startDate,
+    minPrice,
+    maxPrice,
     orderBy,
     sortedBy,
   }: GetListsDto) {
@@ -99,6 +101,12 @@ export class ListsService {
 
     if (roomCount) {
       query['roomCount'] = Number(roomCount);
+    }
+    if (minPrice && maxPrice) {
+      query['price'] = {
+        $gte: Number(+minPrice), // Filter for minimum price
+        $lte: Number(maxPrice), // Filter for maximum price
+      };
     }
 
     if (orderBy && sortedBy) {

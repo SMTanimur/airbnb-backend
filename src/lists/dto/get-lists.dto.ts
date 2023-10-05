@@ -1,5 +1,11 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { SortOrder } from 'src/common/dto/generic-conditions.dto';
 import { PaginationArgs } from 'src/common/dto/pagination-args.dto';
 
@@ -32,6 +38,14 @@ export class GetListsDto extends PaginationArgs {
   @IsString()
   @IsOptional()
   category: string;
+
+  @ApiPropertyOptional({ type: Number })
+  @IsOptional()
+  minPrice: number; // Change to number
+
+  @ApiPropertyOptional({ type: Number })
+  @IsOptional()
+  maxPrice: number;
 
   @ApiPropertyOptional()
   @IsString()
